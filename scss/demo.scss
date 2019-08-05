@@ -1,0 +1,343 @@
+@import "common.scss";
+@import "_mixin.scss";
+.box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    @include box_flex;
+    @include direction(column);
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: rem(50px);
+    padding: 0 rem(10px);
+    @include box_flex;
+    @include align;
+    @include justify(space-between);
+    &>p {
+        font-size: rem(18px);
+        &>span {
+            margin-right: rem(10px);
+        }
+    }
+    span.iconfont {
+        font-weight: bold;
+        font-size: rem(16px);
+    }
+}
+
+footer {
+    width: 100%;
+    height: rem(60px);
+    display: flex;
+    >div {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        >span.iconfont {
+            font-size: rem(20px);
+        }
+    }
+}
+
+.changeColor {
+    color: #a1a1a1;
+}
+
+.swiper-slide img {
+    width: 100%;
+}
+
+section {
+    width: 100%;
+    @include flex;
+    overflow: hidden;
+    &>div {
+        &>div:first-child {
+            width: 100%;
+            height: rem(40px);
+            @include box_flex;
+            @include align;
+            @include justify(space-between);
+            font-size: rem(16px);
+            padding: 0 rem(10px);
+            &>div:first-child {
+                img {
+                    margin-right: rem(5px);
+                }
+                &>span.iconfont {
+                    font-size: rem(16px)
+                }
+            }
+            &>div:last-child {
+                width: rem(326px/2);
+                height: rem(68px/2);
+                border: 1px solid #ccc;
+                border-radius: rem(68px/2);
+                @include box_flex;
+                @include align;
+                &>span.iconfont {
+                    font-size: rem(16px);
+                    margin: 0 rem(5px);
+                }
+            }
+        }
+        &>div:nth-child(4) {
+            width: 100%;
+            height: rem(50px);
+            border-bottom: 1px solid #ccc;
+            @include box_flex;
+            @include align;
+            @include justify;
+            &>dl {
+                @include flex;
+                @include box_flex;
+                @include align;
+                @include justify;
+                span.iconfont {
+                    font-size: rem(28px);
+                }
+                &>dd {
+                    font-size: rem(12px);
+                }
+            }
+        }
+        &>div:nth-child(5) {
+            width: 100%;
+            height: rem(230px/2);
+            @include box_flex;
+            @include align;
+            @include justify;
+            img {
+                width: rem(89px/2);
+            }
+            &>dl {
+                @include flex;
+                @include box_flex;
+                @include align;
+                @include justify;
+                @include direction(column);
+                span.iconfont {
+                    font-size: rem(28px);
+                }
+                &>dd {
+                    font-size: rem(12px);
+                }
+            }
+        }
+        &>div:nth-child(6) {
+            @include flex;
+            @include box_flex;
+            @include align;
+            @include justify;
+            margin-bottom: rem(18px);
+            img:first-child {
+                margin-right: rem(5px);
+            }
+            img {
+                width: rem(320px/2);
+            }
+        }
+        &>div:nth-child(7) {
+            width: 100%;
+            height: rem(320px/2);
+            background: #f8f8f8;
+            &>div {
+                padding: rem(15px) rem(10px) 0;
+                margin-bottom: rem(15px);
+                &>div {
+                    width: 100%;
+                    height: rem(40px);
+                    background: #eeeeee;
+                    padding: 0 rem(10px);
+                    @include box_flex;
+                    @include align;
+                    &>p:first-child {
+                        color: #f987bb;
+                        font-size: rem(14px);
+                        font-weight: bold;
+                        img {
+                            width: rem(25px);
+                            margin-right: rem(10px);
+                        }
+                    }
+                }
+            }
+            >img {
+                width: 100%;
+            }
+        }
+        &>div:nth-child(8) {
+            width: 100%;
+            &>dl {
+                width: 100%;
+                height: rem(376px/2);
+                border-bottom: 1px solid #ccc;
+                @include box_flex;
+                @include align;
+                &>dt {
+                    width: 40%;
+                    height: 100%;
+                    @include box_flex;
+                    @include align;
+                    @include justify;
+                    img {
+                        width: rem(125px);
+                    }
+                }
+                &>dd {
+                    @include flex;
+                    &>h3 {
+                        font-size: rem(16px)
+                    }
+                    &>p:nth-child(2) {
+                        font-size: rem(14px);
+                        color: #c78f9c;
+                    }
+                    &>p:nth-child(3) {
+                        width: rem(90px);
+                        text-align: center;
+                        font-size: rem(12px);
+                        color: #c78f9c;
+                        border: 1px solid #c78f9c;
+                        img {
+                            width: rem(14px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+nav {
+    width: 100%;
+    height: rem(50px);
+    @include box_flex;
+    @include align;
+    @include justify(space-between);
+    &>span.iconfont {
+        font-size: rem(16px);
+    }
+}
+
+.innav {
+    width: rem(720px/2);
+    height: rem(50px);
+    overflow: hidden;
+    &>div {
+        @include box_flex;
+        @include align;
+        &>p {
+            @include flex_shrink(0);
+            height: rem(50px);
+            line-height: rem(50px);
+            border-bottom: 5px solid white;
+            font-size: rem(14px);
+            padding: 0 rem(18px);
+        }
+        &>p.chengStyle {
+            border-bottom: 5px solid #ff4592;
+            color: #ff4592;
+        }
+    }
+}
+
+.priceO {
+    margin-top: rem(30px);
+    padding-right: rem(20px);
+    @include box_flex;
+    @include align;
+    @include justify(space-between);
+    &>div {
+        &>span {
+            color: #ff4592;
+            font-size: rem(14px);
+        }
+        &>p {
+            font-size: rem(14px);
+            color: #f2bd0f;
+            &>span:first-child {
+                font-size: rem(16px);
+            }
+            &>span:last-child {
+                font-size: rem(12px);
+                background: #feeb8f;
+                color: black;
+                padding: rem(2px);
+            }
+        }
+    }
+    &>span.iconfont {
+        width: rem(35px);
+        height: rem(35px);
+        background: #ff4892;
+        border-radius: 50%;
+        text-align: center;
+        line-height: rem(35px);
+        color: white;
+        font-size: rem(25px);
+        padding: rem(2px) rem(1px) 0 0;
+    }
+}
+
+.box>div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: rem(90px);
+    left: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, .5);
+    display: none;
+}
+
+.top {
+    @include box_flex;
+    @include align;
+    @include justify(space-between);
+    width: 100%;
+    height: rem(40px);
+    border-bottom: 1px solid #ccc;
+    background: white;
+    font-size: rem(16px);
+    padding: 0 rem(10px);
+    &>span.iconfont {
+        font-size: rem(20px);
+    }
+    &>b {
+        width: rem(20px);
+        height: rem(20px);
+    }
+}
+
+.bottom {
+    width: 100%;
+    height: rem(300px);
+    background: white;
+    overflow: hidden;
+    &>div {
+        @include box_flex;
+        @include flexWrap;
+        dl {
+            width: 33.33%;
+            height: rem(100px);
+            margin-bottom: rem(20px);
+            font-size: rem(14px);
+            @include box_flex;
+            @include align;
+            @include justify;
+            @include direction(column);
+            dt {
+                margin-bottom: rem(10px);
+            }
+            img {
+                width: rem(50px);
+            }
+        }
+    }
+}

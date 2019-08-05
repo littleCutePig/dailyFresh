@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="css/car.css">
+<link rel="stylesheet" href="fonts/iconfont.css">
+<script src="scripts/libs/flexible.js"></script>
+<script src="scripts/libs/zepto.js"></script>
+<script src="scripts/libs/better-scroll.js"></script>
+
+<body>
+    <div class="box">
+        <header>
+            <span class="iconfont icon-dizhi-01"></span>佳运园<span class="iconfont icon-xiala"></span>
+        </header>
+        <section>
+            <div class="inScenter">
+                <div>
+                    <!-- <dl>
+                        <dt>
+                            <span class="iconfont icon-querenwancheng dui"></span>
+                            <img src="images/图片1_31.jpg" alt="">
+                        </dt>
+                        <dd>
+                            <h3>智利J级车厘子450g</h3>
+                            <p><img src="images/图片1111_16.jpg" alt="">进口检验合格</p>
+                            <div class="priceO">
+                                <div>
+                                    <p>￥<span>69.9</span> <span>会员专享</span></p>
+                                    <span>￥</span><span id="price">199</span>
+                                </div>
+                                <div>
+                                    <span class="jian spans">-</span>
+                                    <span class="num spans">1</span>
+                                    <span class="jia spans">+</span>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl> -->
+                </div>
+            </div>
+            <p class="Pprice">总价: <span class="price">￥0</span></p>
+        </section>
+        <footer>
+            <dl class="changeColor">
+                <dt><span class="iconfont icon-shouye"></span></dt>
+                <dd>首页</dd>
+            </dl>
+            <dl>
+                <dt><span class="iconfont icon-29"></span></dt>
+                <dd>会员</dd>
+            </dl>
+            <dl>
+                <dt><span class="iconfont icon-faxiandingdan"></span></dt>
+                <dd>发现</dd>
+            </dl>
+            <dl>
+                <dt><span class="iconfont icon-gouwuche-xuanzhong"></span></dt>
+                <dd>购物车</dd>
+            </dl>
+            <dl>
+                <dt><span class="iconfont icon-geren"></span></dt>
+                <dd>我的</dd>
+            </dl>
+        </footer>
+    </div>
+</body>
+<script>
+    $("footer>dl").eq(3).addClass("changeColor").siblings().removeClass("changeColor")
+    $("footer>dl").on("click", function() {
+        $(this).addClass("changeColor").siblings().removeClass("changeColor")
+        if ($(this).find("dd").text() == "首页") {
+            window.location.href = "index.html";
+        }
+    })
+
+    var BScroll = new BScroll(".inScenter", {
+        probeType: 2,
+        click: true
+    })
+
+    var jians = null,
+        jias = null,
+        nums = null,
+        dl = null,
+        inScenter = document.querySelector(".inScenter"),
+        totalPrices1 = document.querySelector(".price");
+    if (window.localStorage.getItem("arr")) {
+        var arr = JSON.parse(window.localStorage.getItem("arr"));
+        var html = ``;
+        var inScenterD = document.querySelector(".inScenter>div");
+
+        arr.forEach(function(item) {
+            html += `<dl>
+                        <dt>
+                            <span class="iconfont icon-querenwancheng dui"></span>
+                            <img src="${item.price.src}" alt="">
+                        </dt>
+                        <dd>
+                            <h3>${item.name}</h3>
+                            <p><img src="images/图片1111_16.jpg" alt="">进口检验合格</p>
+                            <div class="priceO">
+                                <div>
+                                    <p>￥<span>${item.price.price2}</span> <span>会员专享</span></p>
+                                    <span>￥</span><span id="price">${item.price.price1}</span>
+                                </div>
+                                <div>
+                                    <span class="jian spans">-</span>
+                                    <span class="num spans">1</span>
+                                    <span class="jia spans">+</span>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>`
+        })
+        inScenterD.innerHTML = html;
+        jians = [...document.querySelectorAll('.jian')];
+        jias = [...document.querySelectorAll('.jia')];
+        dl = [...document.querySelectorAll('.inScenter>div>dl')];
+    } else {
+        inScenterD.innerHTML = "";
+    }
+
+    bindEvent()
+
+    function bindEvent() {
+        var count = 1;
+        jians.forEach(function(item) {
+            item.addEventListener("click", function() {
+                count--
+                if (count < 1) {
+                    count = 1
+                }
+                this.nextElementSibling.innerHTML = count
+                if (this.parentNode.parentNode.parentNode.parentNode.querySelector(".dui").classList.contains("changeColor")) {
+                    MyCar()
+                }
+            })
+        })
+
+        jias.forEach(function(item) {
+            item.addEventListener("click", function() {
+                count++
+                this.previousElementSibling.innerHTML = count;
+                if (this.parentNode.parentNode.parentNode.parentNode.querySelector(".dui").classList.contains("changeColor")) {
+                    MyCar()
+                }
+            })
+        })
+
+        dl.forEach(function(item) {
+            item.addEventListener("click", function(e) {
+                var xuanzhong = this.querySelector("dt>span");
+                if (!e.target.classList.contains("spans")) {
+                    if (xuanzhong.classList.contains("changeColor")) {
+                        xuanzhong.classList.remove("changeColor")
+                        MyCar()
+                    } else {
+                        xuanzhong.classList.add("changeColor");
+                        MyCar()
+                    }
+                }
+            })
+        })
+    }
+
+    function MyCar() {
+        var num = [];
+        var prices = [];
+        var arr = []
+        var cgc = inScenter.querySelectorAll(".changeColor");
+        var totalPrices2 = 0;
+        cgc.forEach(function(item) {
+            num.push(item.parentNode.parentNode.querySelector(".num").innerHTML);
+            prices.push(item.parentNode.parentNode.querySelector("#price").innerHTML);
+        })
+
+        for (var i = 0; i < num.length; i++) {
+            arr.push(num[i] * prices[i])
+        }
+        for (var a in arr) {
+            totalPrices2 += arr[a];
+        }
+
+        totalPrices1.innerHTML = "￥" + totalPrices2;
+    }
+</script>
+
+</html>
